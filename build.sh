@@ -20,7 +20,7 @@ docker build -t etcd .
 
 cd ../pause
 docker run -v .:/tmp/pause -w /tmp/pause hypriot/rpi-golang go build --ldflags '-extldflags "-static" -s' pause.go
-docker build -t -t  gcr.io/google_containers/pause:0.8.0 .
+docker build -t gcr.io/google_containers/pause:0.8.0 .
 
 cd ../
 curl -fsSL -o hyperkube https://github.com/andrewpsuedonym/Kubernetes-Arm-Binaries/raw/master/hyperkube
@@ -33,6 +33,8 @@ mkdir -p /etc/kubernetes/manifests
 cp kubernetes.yaml /etc/kubernetes/manifests/kubernetes.yaml
 mv kubelet /usr/bin/kubelet
 chmod +x /usr/bin/kubelet
+
+systemctl start kubelet
 
 curl -fsSL -o kubectl https://storage.googleapis.com/kubernetes-release/release/v1.0.3/bin/linux/arm/kubectl
 chmod +x kubectl
