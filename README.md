@@ -51,6 +51,8 @@ docker build -t hyperkube .
 
 Grab the binary from https://github.com/andrewpsuedonym/Kubernetes-Arm-Binaries.git
 
+curl -fsSL -o hyperkube https://github.com/andrewpsuedonym/Kubernetes-Arm-Binaries/raw/master/hyperkube
+
 $ cat /etc/systemd/system/kubelet.service 
 [Unit]
 Description=Kubernetes Kubelet
