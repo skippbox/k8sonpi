@@ -1,0 +1,15 @@
+[Unit]
+Description=Kubernetes Kubelet
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+ExecStart=/usr/bin/kubelet  \
+--api-servers=http://127.0.0.1:8080 \
+--allow-privileged=true \
+--config=/etc/kubernetes/manifests \
+--v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
