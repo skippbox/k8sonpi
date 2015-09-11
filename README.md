@@ -24,12 +24,13 @@ For the impatient:
 
 1. Clone this repository on your Pi
 
-    $ git clone https://github.com/runseb/k8s4pi.git
-    $ cd ./k8s4pi
+     $ git clone https://github.com/runseb/k8s4pi.git
+
+     $ cd ./k8s4pi
 
 2. Run the `build.sh` script
 
-    $ ./build.sh
+     $ ./build.sh
 
 3. Enjoy
 
@@ -41,12 +42,12 @@ The Kubelet binary for ARM is downloaded and installed in `/usr/bin/kubelet`, a 
 
 In this pod we have:
 
-1. An etcd container. Which we run by building an etcd image from scratch on the PI.
+1. An `etcd` container. Which we run by building an etcd image from scratch on the PI.
 2. Several containers based on the Hyperkube image. Hyperkube is a single binary that can start all the Kubernetes components: API server, controller, scheduler.
 We build a local Hyperkube image.
 3. Then a little trick. Kubernetes does assume that you will run the nodes on x86_64 and automatically pulls an image called the _pause_ container. This container is used to get an IP and share that IP with all the containers in the pod. For the PI, we need to run this pause container on ARM, we trick Kubernetes by building the image `gcr.io/google_containers/pause:0.8.0` locally after having compiled the pause Golang code for ARM.
 The ARM binaries for the Kubelet and hyperkube are downloaded from https://github.com/andrewpsuedonym/Kubernetes-Arm-Binaries.git
 4. Finally, we download the Kubernetes client `kubectl` for ARM form the official release:
 
-    $ curl -fsSL -o kubectl https://storage.googleapis.com/kubernetes-release/release/v1.0.3/bin/linux/arm/kubectl
+     $ curl -fsSL -o kubectl https://storage.googleapis.com/kubernetes-release/release/v1.0.3/bin/linux/arm/kubectl
 
