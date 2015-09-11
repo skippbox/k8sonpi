@@ -16,18 +16,25 @@
 git clone https://github.com/coreos/etcd.git
 cp Dockerfile.etcd ./etcd/Dockerfile
 cd etcd
+curl -fsSL -o go-wrapper https://raw.githubusercontent.com/docker-library/golang/3427e88341de17a4d8921b859180a2649e1ab96e/1.4/go-wrapper
 docker build -t etcd .
 
 cd ../pause
-docker run -v .:/tmp/pause -w /tmp/pause hypriot/rpi-golang go build --ldflags '-extldflags "-static" -s' pause.go
+docker run -v $PWD:/tmp/pause -w /tmp/pause hypriot/rpi-golang go build --ldflags '-extldflags "-static" -s' pause.go
 docker build -t gcr.io/google_containers/pause:0.8.0 .
 
 cd ../
 curl -fsSL -o hyperkube https://github.com/andrewpsuedonym/Kubernetes-Arm-Binaries/raw/master/hyperkube
 curl -fsSL -o kubelet https://github.com/andrewpsuedonym/Kubernetes-Arm-Binaries/raw/master/kubelet
 
+chmod +x hyperkube
+mkdir images
+mv hyperkube ./images
+cp Dockerfile.hyperkube ./images
+cd images
 docker build -f Dockerfile.hyperkube -t hyperkube .
 
+cd ..
 cp kubelet.service /etc/systemd/system/kubelet.service
 mkdir -p /etc/kubernetes/manifests
 cp kubernetes.yaml /etc/kubernetes/manifests/kubernetes.yaml
