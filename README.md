@@ -17,7 +17,15 @@
 Kubernetes on RaspberryPI
 =========================
 
-This sets up a one node Kubernetes cluster on a RaspberryPI.
+This sets up a one node Kubernetes cluster on a RaspberryPI. This is based on the [Hypriot](http://blog.hypriot.com) Docker image for RPi.
+
+Why ? Because it is the easiest way to start experimenting with containers on ARM architectures which can be extremely useful for the IoT and Embedded business.
+It can also be a great platform to investigate scalability issues of both Docker and Kubernetes.
+
+Requirements
+------------
+
+You will need a RaspberryPi and you will need to have installed the Hypriot OS [image](http://blog.hypriot.com/getting-started-with-docker-on-your-arm-device/) on it
 
 For the impatient:
 ------------------
